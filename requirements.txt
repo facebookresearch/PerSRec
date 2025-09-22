@@ -23,3 +23,5 @@ wandb==0.19.1
 xformers==0.0.28.post3
 sentencepiece==0.2.0
 iopath=0.1.10
+setuptools==69.5.1
+fbgemm_gpu==0.5.0
