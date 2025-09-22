@@ -17,8 +17,16 @@ This code could run in devgpu without buck2. To do that, please take those addit
 5. `pip install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia`
 6. `pip install ninja` to speed up the flash_atten build
 7. `pip install -r requirements.txt`. flash_atten could be very slow to build
-8. `pip install xformers` for merrec specific
-9. for LLama 3.1+, you need to `pip install transformers==4.43.1`
+
+### flash_atten took a long time to install
+
+It may take hours to install flash_atten because it tries to build the package during installation. ninja could speed up the process but it could still took a long time. You could try [installation without build](https://github.com/Dao-AILab/flash-attention/issues/945#issuecomment-2958432524):
+
+```
+pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.6cxx11abiTRUE-cp312-cp312-linux_x86_64.whl
+```
+
+Please make sure your OS (linux_x86_64), python version (cp312), cuda version (cu12) and pytrorch version (torch2.6) match your environment. You could find other versions from [github flash-attention](https://github.com/Dao-AILab/flash-attention/releases)
 
 ## Dataset
 
@@ -33,7 +41,7 @@ df = pd.read_csv("your_file.csv")
 df.to_parquet("your_file.parquet")
 ```
 
-TODO: how to process Merrec and NB-NERD dataset.
+We have provided the data processing code for MerRec and EB_NERD dataset in dataset.
 
 Please make sure you have configured `text_path`, `data_path`, `item_pretrain_dir` and `user_pretrain_dir` accordingly.
 
